@@ -1,35 +1,22 @@
-import os
 import tweepy
 import time
 import random
 from datetime import datetime
+import os
 
-# ======== Cek environment variable ========
-required_vars = [
-    "BEARER_TOKEN", 
-    "API_KEY", 
-    "API_SECRET", 
-    "ACCESS_TOKEN", 
-    "ACCESS_TOKEN_SECRET"
-]
-
-for var in required_vars:
-    if not os.getenv(var):
-        raise ValueError(f"[ERROR] Environment variable {var} belum diset!")
-
-# ======== Konfigurasi API ========
-bearer_token = os.getenv("BEARER_TOKEN")
-api_key = os.getenv("API_KEY")
-api_secret = os.getenv("API_SECRET")
-access_token = os.getenv("ACCESS_TOKEN")
-access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
+# ======== Konfigurasi API (langsung di sini) ========
+BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAEwvawEAAAAARKy0w8TOvztVarzR3eOwCABZ7Ws%3DD6Jaln95eIM3zDHnyLLs8nWVmtmBuffplUuK9fyz9j22HZeQEM"
+API_KEY = "NLXDOoP7lOch4w20dvC8atGoa"
+API_SECRET = "LO7ZMFTZbjMx2R8Q5dszcKVzsvw6JwKyCUv5c0EIRpPzCttqHL"
+ACCESS_TOKEN = "1504365905111035905-ehdBA7ebp7aygpC5pQXYF4mgNxEyYw"
+ACCESS_TOKEN_SECRET = "yGoCzy0cYYBO2uPg9Gk76rLUT9jXNQgEUV6fUC2a6Js5D"
 
 # OAuth1 untuk posting tweet
-auth = tweepy.OAuth1UserHandler(api_key, api_secret, access_token, access_token_secret)
+auth = tweepy.OAuth1UserHandler(API_KEY, API_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 # Client v2 untuk baca mention
-client_v2 = tweepy.Client(bearer_token=bearer_token)
+client_v2 = tweepy.Client(bearer_token=BEARER_TOKEN)
 
 # ======== Folder & file ========
 BASE_FOLDER = "queue_bot"
