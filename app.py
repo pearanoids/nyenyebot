@@ -12,9 +12,9 @@ ACCESS_TOKEN = "1504365905111035905-JFqPbuEb7TlpwLLXcBpHsmcHAOQSHW"
 ACCESS_TOKEN_SECRET = "rbugFTxZB0QY5nVJaxxz0YqNeRqqldafNN5DclrW7Zbc8"
 
 # OAuth1 untuk posting tweet
-auth = tweepy.OAuth1UserHandler(API_KEY, API_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
-
 # Client v2 untuk baca mention
 client_v2 = tweepy.Client(bearer_token=BEARER_TOKEN)
 
