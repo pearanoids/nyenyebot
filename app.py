@@ -4,13 +4,12 @@ import random
 from datetime import datetime
 import os
 
-# ======== Konfigurasi API (langsung di sini) ========
+# ======== Konfigurasi API ========
 BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAEwvawEAAAAA48x7h9TUmO03p1DWXNeca1idYJs%3DqkLh2xwwW9fAAGi3goA9n2kj4SOZh9CaUyY1sSb76WEAgWzsTz"
 API_KEY = "c1VvzfhWsMYHiT9t9y7MMKGMc"
 API_SECRET = "mcaZNlj8UWObae7lOCICAGdQPPCX0t2zip3JV1WtYuRZMYYtyq"
 ACCESS_TOKEN = "1504365905111035905-YuzXxZkS7Fp9PKuQ5WkzH7Upvf2p6v"
 ACCESS_TOKEN_SECRET = "iAwbusG6H3mkw6PqtnkfML60K63ewGHVRnnSCBJoiom3H"
-
 USERNAME_BOT = "dixpyc"  # tanpa '@'
 
 # --------------------------------------------------
@@ -26,9 +25,8 @@ if not os.path.exists(QUEUE_FILE):
 if not os.path.exists(LAST_ID_FILE):
     open(LAST_ID_FILE, "w").close()
 
-
 # --------------------------------------------------
-# === TEKS PROCESSOR: VOKAL → i + RANDOM CAPS ===
+# === TEXT PROCESSOR ===
 # --------------------------------------------------
 
 def ubah_vokal(teks):
@@ -85,7 +83,7 @@ def pop_queue():
 
 
 # --------------------------------------------------
-# === LAST SEEN ID SYSTEM ===
+# === LAST ID SYSTEM ===
 # --------------------------------------------------
 
 def get_last_seen_id():
@@ -105,7 +103,6 @@ def set_last_seen_id(tweet_id):
 # === AUTH API ===
 # --------------------------------------------------
 
-# v2: read
 client_v2 = tweepy.Client(
     bearer_token=BEARER_TOKEN,
     consumer_key=API_KEY,
@@ -114,13 +111,12 @@ client_v2 = tweepy.Client(
     access_token_secret=ACCESS_TOKEN_SECRET
 )
 
-# v1: write
 auth = tweepy.OAuth1UserHandler(API_KEY, API_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 client_v1 = tweepy.API(auth)
 
 
 # --------------------------------------------------
-# === HANYA CEK MENTIONS (TANPA FALLBACK) ===
+# === CEK MENTIONS SETIAP 10 MENIT — TANPA FALLBACK ===
 # --------------------------------------------------
 
 def check_mentions():
@@ -137,8 +133,7 @@ def check_mentions():
         )
 
     except tweepy.TooManyRequests:
-        print("[LIMIT] get_users_mentions terkena 429. Menunggu 2 menit...")
-        time.sleep(120)
+        print("[LIMIT] get_users_mentions 429 → skip satu siklus")
         return
 
     except Exception as e:
@@ -154,7 +149,7 @@ def check_mentions():
         user_id = m.author_id
         username = client_v2.get_user(id=user_id).data.username
 
-        # ambil teks parent tweet jika mention adalah reply
+        # jika mention adalah reply → ambil parent
         if m.referenced_tweets:
             ref = m.referenced_tweets[0]
             if ref.type == "replied_to":
@@ -170,7 +165,7 @@ def check_mentions():
 
 
 # --------------------------------------------------
-# === PROSES QUEUE DAN POSTING ===
+# === POST QUEUE — TANPA FALLBACK ===
 # --------------------------------------------------
 
 def process_queue():
@@ -188,27 +183,22 @@ def process_queue():
     try:
         client_v1.update_status(final_post)
         print(f"[POSTED] → @{username} : {teks[:30]}...")
-        time.sleep(5)
 
     except tweepy.RateLimitError:
-        print("[LIMIT POST] Post terkena limit. Menunggu 2 menit...")
-        add_to_queue(username, item["user_id"], item["tweet_id"], teks)
-        time.sleep(120)
+        print("[LIMIT POST] Posting 429 → skip siklus, tidak retry")
 
     except Exception as e:
         print("[ERROR] Post:", e)
-        add_to_queue(username, item["user_id"], item["tweet_id"], teks)
-        time.sleep(30)
 
 
 # --------------------------------------------------
-# === MAIN LOOP (AMAN UNTUK FREE TIER) ===
+# === MAIN LOOP 10 MENIT (600 DETIK) ===
 # --------------------------------------------------
 
-print("=== BOT TWITTER/X AKTIF (NO FALLBACK) ===")
+print("=== BOT TWITTER/X AKTIF (INTERVAL 10 MENIT, NO FALLBACK) ===\n")
 
 while True:
     check_mentions()
     process_queue()
-    print("[WAIT] 120 detik...\n")
-    time.sleep(120)
+    print("[WAIT] 600 detik (10 menit)...\n")
+    time.sleep(600)
