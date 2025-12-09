@@ -6,7 +6,6 @@
 [![Deploy on Heroku](https://img.shields.io/badge/deploy-heroku-663399.svg)](#deploy-to-heroku)
 
 > A tiny chaotic bot that replies to Twitter/X mentions by converting every vowel into **“i”** and randomizing capitalization.  
-> Pure silliness, Pure joy🎲💬
 
 ---
 
