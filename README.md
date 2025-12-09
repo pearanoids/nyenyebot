@@ -259,9 +259,3 @@ Made playful by you, polished by me. If you want, I can convert this README into
 
 
 ---
-
-If you want, I’ll also:
-
-produce the final README.md file content ready to paste,
-
-or update your app.py to read from os.environ (I can generate the patched script without the hard-coded keys). Which one first? 🚀
