@@ -2,7 +2,6 @@
 
 
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](#license)
 [![Deploy on Railway](https://img.shields.io/badge/deploy-railway-purple)](#deploy-to-railway)
 [![Deploy on Heroku](https://img.shields.io/badge/deploy-heroku-663399.svg)](#deploy-to-heroku)
 
