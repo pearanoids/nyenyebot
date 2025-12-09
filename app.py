@@ -20,13 +20,13 @@ P = "\033[95m"  # ungu
 # ===============  KONFIGURASI API  ================
 # ==================================================
 
-BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAEwvawEAAAAA48x7h9TUmO03p1DWXNeca1idYJs%3DqkLh2xwwW9fAAGi3goA9n2kj4SOZh9CaUyY1sSb76WEAgWzsTz"
-API_KEY = "c1VvzfhWsMYHiT9t9y7MMKGMc"
-API_SECRET = "mcaZNlj8UWObae7lOCICAGdQPPCX0t2zip3JV1WtYuRZMYYtyq"
-ACCESS_TOKEN = "1504365905111035905-YuzXxZkS7Fp9PKuQ5WkzH7Upvf2p6v"
-ACCESS_TOKEN_SECRET = "iAwbusG6H3mkw6PqtnkfML60K63ewGHVRnnSCBJoiom3H"
+BEARER_TOKEN = "YOUR KEY"
+API_KEY = "YOUR KEY"
+API_SECRET = "YOUR KEY"
+ACCESS_TOKEN = "YOUR KEY"
+ACCESS_TOKEN_SECRET = "YOUR KEY"
 
-USERNAME_BOT = "dixpyc"  # tanpa '@'
+USERNAME_BOT = "YOUR USERNAME BOT"  # without '@'
 
 # ==================================================
 #  =============== FILE LAST SEEN ID ==============
