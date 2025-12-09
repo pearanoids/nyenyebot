@@ -9,3 +9,5 @@ Bot ini akan membalas mention secara otomatis:
 - Mengacak kapitalisasi huruf lain
 - Queue, backup, dan log otomatis
 - Siap deploy ke Heroku & GitHub
+
+![example.png](example.png)
