@@ -27,8 +27,6 @@
 app.py
 requirements.txt
 Procfile
-last_id.txt
-example.png
 ```
 
 ---
@@ -95,15 +93,15 @@ git push -u origin main
 ```
 
 ### 2. Railway → New Project → Deploy from GitHub  
-### 3. Add Variables:
+### 3. Add Variables App.py:
 
 ```
-BEARER_TOKEN=
-API_KEY=
-API_SECRET=
-ACCESS_TOKEN=
-ACCESS_TOKEN_SECRET=
-USERNAME_BOT=
+BEARER_TOKEN=your_token_here
+API_KEY=your_api_key_here
+API_SECRET=your_api_secret_here
+ACCESS_TOKEN=your_access_token_here
+ACCESS_TOKEN_SECRET=your_access_token_secret_here
+USERNAME_BOT=your_username_bot_without_@
 ```
 
 ### 4. Set Start Command:
